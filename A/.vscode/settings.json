@@ -88,6 +88,24 @@
         "memory_resource": "cpp",
         "type_traits": "cpp",
         "utility": "cpp",
-        "format": "cpp"
+        "format": "cpp",
+        "any": "cpp",
+        "barrier": "cpp",
+        "codecvt": "cpp",
+        "cuchar": "cpp",
+        "coroutine": "cpp",
+        "latch": "cpp",
+        "numbers": "cpp",
+        "semaphore": "cpp",
+        "shared_mutex": "cpp",
+        "span": "cpp",
+        "expected": "cpp",
+        "numeric": "cpp",
+        "ranges": "cpp",
+        "spanstream": "cpp",
+        "stacktrace": "cpp",
+        "stdfloat": "cpp",
+        "stop_token": "cpp",
+        "syncstream": "cpp"
     }
 }
