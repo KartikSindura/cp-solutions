@@ -13,7 +13,11 @@ int main() {
         cin >> a >> b;
         count += b - a + 1;
     }
-    cout << count;
+    count %= k;
+    if (count != 0) {
+        count = k - count;
+    }
 
+    cout << count;
     return 0;
 }
