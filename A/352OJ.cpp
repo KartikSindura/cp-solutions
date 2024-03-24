@@ -5,29 +5,39 @@ typedef long long ll;
 int visited[25][25];
 char arr[25][25];
 
-void dfs(int x, int y, int n, int m) {
-    vector<pair<int, int>> vec = find_neighbors(x, y, n, m);
-    visited[x][y] = 1;
-    for (auto &value : vec) {
-        if (!visited[value.first][value.second] &&
-            arr[value.first][value.second] == '1') {
-            dfs(value.first, value.second, n, m);
-        }
-    }
-}
+// void dfs(int x, int y, int n, int m) {
+//     vector<pair<int, int>> vec = find_neighbors(x, y, n, m);
+//     visited[x][y] = 1;
+//     for (auto &value : vec) {
+//         if (!visited[value.first][value.second] &&
+//             arr[value.first][value.second] == '1') {
+//             dfs(value.first, value.second, n, m);
+//         }
+//     }
+// }
 
 const vector<int> dx = {0, 0, 1, -1, 1, -1, 1, -1};
 const vector<int> dy = {1, -1, 0, 0, 1, -1, -1, 1};
 
-bool is_valid (int x, int y, int n, int m) {
+bool is_valid(int x, int y, int n, int m) {
     // 1. Check if index is within bounds
     // 2. check your visited
     // 3. check any other remaining conditions
-    return x >= 0 && x < n && y >= 0 && y < m && !visited[x][y] && arr[x][y] == '1';
+    return x >= 0 && x < n && y >= 0 && y < m && !visited[x][y] &&
+           arr[x][y] == '1';
 }
 
 void dfs_better(int x, int y, int n, int m) {
     cout << "dfs_better " << x << ", " << y << endl;
+
+    visited[x][y] = 1;
+    for (int k = 0; k < 8; k++) {
+        int nx = x + dx[k], ny = y + dy[k];
+        // check if this is valid (nx, ny)
+        if (is_valid(nx, ny, n, m)) {
+            dfs_better(nx, ny, n, m);
+        }
+    }
     /*
            (y)
             0 1 2
@@ -38,13 +48,13 @@ void dfs_better(int x, int y, int n, int m) {
     e -> a, b, c, d, f, g, h, x -> 4 sides + 4 diagonals
     e -> b, d, f, h -> 4 sides
     e -> a, c, g, x -> 4 diagonals
-    
+
     e -> b, d, f, h -> 4 sides
 
     (1, 1) -> (0, 1), (1, 0), (1, 2), (2, 1)
-    (x, y) -> (x - 1, y) [UP], (x + 1, y) [DOWN], (x, y + 1) [RIGHT], (x, y - 1) [LEFT]
-    offset (k) = 1
-    
+    (x, y) -> (x - 1, y) [UP], (x + 1, y) [DOWN], (x, y + 1) [RIGHT], (x, y - 1)
+    [LEFT] offset (k) = 1
+
     List of offsets = {
         (-1, 0),
         (1, 0),
@@ -57,15 +67,6 @@ void dfs_better(int x, int y, int n, int m) {
     int dx[] = {0, 0, 1, -1, 1, -1, 1, -1}
     int dy[] = {1, -1, 0, 0, 1, -1, -1, 1}
     */
-
-    visited[x][y] = 1;
-    for (int k = 0; k < 8; k++) {
-        int nx = x + dx[k], ny = y + dy[k];
-        // check if this is valid (nx, ny)
-        if (is_valid(nx, ny, n, m)) {
-            dfs_better(nx, ny, n, m);
-        }
-    }
 }
 
 int main() {
