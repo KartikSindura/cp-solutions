@@ -15,13 +15,6 @@ bool valid(int i, int j, int n, int len) {
 
 void dfs(int i, int j, int n, int len) {
     visited[i][j] = 1;
-    // for (int i = 0; i < n; i++) {
-    //     cout << endl;
-    //     for (int k = 0; k < n; k++) {
-    //         cout << visited[i][k];
-    //     }
-    // }
-    // cout << endl << "length: " << len << endl;
     for (int k = 0; k < 4; k++) {
         int ni = i + dx[k], nj = j + dy[k];
         if (valid(ni, nj, n, len) && len < n / 2) {
