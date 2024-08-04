@@ -5,38 +5,38 @@ typedef long long ll;
 int n;
 
 int valid(int p) {
-    if (p < 0 || p >= n) {
-        return 0;
-    } else {
-        return 1;
-    }
+  if (p < 0 || p >= n) {
+    return 0;
+  } else {
+    return 1;
+  }
 }
 
 int main() {
-    int a;
-    cin >> n >> a;
-    vector<int> vec;
-    lp(i, n) {
-        int p;
-        cin >> p;
-        vec.push_back(p);
-    }
+  int a;
+  cin >> n >> a;
+  vector<int> vec;
+  lp(i, n) {
+    int p;
+    cin >> p;
+    vec.push_back(p);
+  }
 
-    int count = 0;
-    if (vec[a - 1] == 1) {
-        count++;
+  int count = 0;
+  if (vec[a - 1] == 1) {
+    count++;
+  }
+  for (int i = 1; i < n; i++) {
+    if ((!valid(a - i - 1) && (valid(a + i - 1) && vec[a + i - 1] == 1)) ||
+        (!valid(a + i - 1) && (valid(a - i - 1) && vec[a - i - 1] == 1))) {
+      count++;
+    } else if ((valid(a - i - 1) && vec[a - i - 1] == 1) &&
+               (valid(a + i - 1) && vec[a + i - 1] == 1)) {
+      count += 2;
     }
-    for (int i = 1; i < n; i++) {
-        if ((!valid(a - i - 1) && (valid(a + i - 1) && vec[a + i - 1] == 1)) ||
-            (!valid(a + i - 1) && (valid(a - i - 1) && vec[a - i - 1] == 1))) {
-            count++;
-        } else if ((valid(a - i - 1) && vec[a - i - 1] == 1) &&
-                   (valid(a + i - 1) && vec[a + i - 1] == 1)) {
-            count += 2;
-        }
-    }
-    cout << count;
-    return 0;
+  }
+  cout << count;
+  return 0;
 }
 /*
 6 3
