@@ -1,0 +1,13 @@
+input1
+3 4 R
+G.B.
+.RR.
+TTT.
+
+
+input2
+3 3 Z
+...
+.H.
+..Z
+
