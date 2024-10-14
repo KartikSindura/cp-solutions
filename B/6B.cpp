@@ -18,41 +18,41 @@ const vector<int> dy = {1, -1, 0, 0};
 int ans = 0;
 
 bool is_valid(int x, int y, char c) {
-    return x >= 0 && x < n && y >= 0 && y < m && c != '.' && c != boss &&
-           !visited_char[c - 'A'];
+  return x >= 0 && x < n && y >= 0 && y < m && c != '.' && c != boss &&
+         !visited_char[c - 'A'];
 }
 
 void search(int x, int y) {
-    // visited[x][y] = 1;
-    for (int k = 0; k < 4; k++) {
-        int nx = x + dx[k], ny = y + dy[k];
-        if (is_valid(nx, ny, arr[nx][ny])) {
-            // visited_char.insert(arr[nx][ny]);
-            visited_char[arr[nx][ny] - 'A'] = true;
-            ans++;
-        }
+  // visited[x][y] = 1;
+  for (int k = 0; k < 4; k++) {
+    int nx = x + dx[k], ny = y + dy[k];
+    if (is_valid(nx, ny, arr[nx][ny])) {
+      // visited_char.insert(arr[nx][ny]);
+      visited_char[arr[nx][ny] - 'A'] = true;
+      ans++;
     }
-    arr[x][y] = '.';
+  }
+  arr[x][y] = '.';
 }
 
 int main() {
-    cin >> n >> m >> boss;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            // char l;
-            // cin >> l;
-            // arr[i][j] = l;
-            cin >> arr[i][j];
-        }
+  cin >> n >> m >> boss;
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < m; j++) {
+      // char l;
+      // cin >> l;
+      // arr[i][j] = l;
+      cin >> arr[i][j];
     }
+  }
 
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            if (arr[i][j] == boss) {
-                search(i, j);
-            }
-        }
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < m; j++) {
+      if (arr[i][j] == boss) {
+        search(i, j);
+      }
     }
+  }
 
-    cout << ans << endl;
+  cout << ans << endl;
 }
