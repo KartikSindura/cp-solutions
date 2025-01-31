@@ -222,7 +222,6 @@ int main() {
   int n = costs.size();
   rec(0, n, 0, -1, minimumTotalCost, costs);
   cout << minimumTotalCost << endl;
-
   memset(memo, -1, sizeof memo);
 
   int attemptTwo = min(min(solve(0, n, 0, costs), solve(0, n, 1, costs)),
