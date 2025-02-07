@@ -22,7 +22,41 @@ int solve(int i, int lastColor, int count, vector<string> &grid,
 
   int ans = 1e9;
 
-  / int n, m, x, y;
+  /*
+   count is < x in that case keep the same lastColor
+   count is >= x and < y in that we can keep the same lastColor or we can change
+   the color count is == y in that case we have to change the lastColor
+ */
+
+  if (count < x) {
+    // keep the same color
+    int cost = (lastColor == 0) ? n - white_count[i] : white_count[i];
+    ans = min(ans, cost + solve(i + 1, lastColor, count + 1, grid, white_count,
+                                x, y));
+
+  } else if (count >= x && count < y) {
+    // keep the same color
+    int cost = (lastColor == 0) ? n - white_count[i] : white_count[i];
+    ans = min(ans, cost + solve(i + 1, lastColor, count + 1, grid, white_count,
+                                x, y));
+    // change the color
+    cost = (1 - lastColor == 0) ? n - white_count[i] : white_count[i];
+    ans = min(ans,
+              cost + solve(i + 1, 1 - lastColor, 1, grid, white_count, x, y));
+  } else if (count == y) {
+    // change the color
+    int cost = (1 - lastColor == 0) ? n - white_count[i] : white_count[i];
+    ans = min(ans,
+              cost + solve(i + 1, 1 - lastColor, 1, grid, white_count, x, y));
+  } else {
+    assert(false);
+  }
+
+  return dp[i][count][lastColor] = ans;
+}
+
+int main() {
+  int n, m, x, y;
   cin >> n >> m >> x >> y;
   vector<string> grid(n);
   vector<int> white_count(m, 0);
