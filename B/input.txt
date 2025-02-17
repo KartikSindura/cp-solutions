@@ -1,18 +1,2 @@
-9 11
-wwllwwlwlll
-wwwwllwwlww
-wwwwlllwwlw
-wllwwlwwwww
-wwllllwwwwl
-wwwwwwwllll
-lwwlwlllwll
-wwwlllwlllw
-wwwwllwlllw
-2 5
-5 5
-wwwww
-wwggw
-wwwww
-wggww
-wwwww
-1 3
+6
+4 5 3 8 3 7
