@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <cstdlib>
 using namespace std;
 typedef long long ll;
 #define lp(i, n) for (int i = 0; i < n; i++)
