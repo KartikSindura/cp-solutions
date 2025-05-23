@@ -4,51 +4,44 @@ typedef long long ll;
 #define lp(i, n) for (int i = 0; i < n; i++)
 #define lps(start, n) for (int i = start; i <= n; i++)
 
-map<pair<int, int>, int> mp;
-ll solve(ll a, ll b) {
-  if (a == b) {
-    return 0;
-  }
-
-  if (a == 0 || b == 0) {
-    return INT_MAX;
-  }
-
-  if (mp.find({a, b}) != mp.end()) {
-    return mp[{a, b}];
-  }
-
-  ll dp = INT_MAX;
-  if (a % 2 == 0)
-    dp = min(dp, 1 + solve(a / 2, b));
-  if (b % 2 == 0)
-    dp = min(dp, 1 + solve(a, b / 2));
-  if (a % 3 == 0)
-    dp = min(dp, 1 + solve(a / 3, b));
-  if (b % 3 == 0)
-    dp = min(dp, 1 + solve(a, b / 3));
-  if (a % 5 == 0)
-    dp = min(dp, 1 + solve(a / 5, b));
-  if (b % 5 == 0)
-    dp = min(dp, 1 + solve(a, b / 5));
-  return mp[{a, b}] = dp;
-}
-
 int main() {
-  ll a, b;
-  cin >> a >> b;
+  string burger;
+  cin >> burger;
+  int nb, ns, nc, pb, ps, pc;
+  cin >> nb >> ns >> nc >> pb >> ps >> pc;
+  ll money;
+  cin >> money;
+  ll ans = 0;
 
-  if (a == b) {
-    cout << 0;
-    return 0;
-  }
-  ll ans = solve(a, b);
-  if (ans == INT_MAX) {
-    cout << -1 << endl;
-    return 0;
+  int b = 0, s = 0, c = 0;
+  for (auto &val : burger) {
+    if (val == 'B') {
+      b++;
+    } else if (val == 'S') {
+      s++;
+    } else {
+      c++;
+    }
   }
 
-  cout << ans;
+  auto can_make = [&](ll burgers) {
+    ll costb = max(0LL, burgers * b - nb);
+    ll costs = max(0LL, burgers * s - ns);
+    ll costc = max(0LL, burgers * c - nc);
+    return (costb * pb + costs * ps + costc * pc) <= money;
+  };
+
+  ll low = 0, high = 1e13;
+  while (low <= high) {
+    ll mid = (low + high) / 2;
+    if (can_make(mid)) {
+      ans = mid;
+      low = mid + 1;
+    } else {
+      high = mid - 1;
+    }
+  }
+  cout << ans << endl;
 }
 
 // Range overlap check => !(b<c || d<a)
